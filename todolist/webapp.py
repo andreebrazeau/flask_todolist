@@ -22,3 +22,19 @@ def save_task():
     print request.form 
     return "Save a task"
 
+
+@app.route("/task/<task_id>", methods=["GET"])
+def edit_task(task_id):
+    task = Task.query.get(task_id)
+    return render_template("task.html", task=task)
+
+@app.route("/task/<task_id>", methods=["POST"])
+def update_task(task_id):
+    task = Task.query.get(task_id)
+    task.title = request.form['title']
+    task.note = request.form['notes']
+    print request.form
+    if request.form.get('completed'):
+        task.complete()
+    model.save_all()
+    return redirect(url_for("home"))

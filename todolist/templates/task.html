@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<style>
+        body {
+            background: #FFFFFF;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        h1 {
+            color: #CC33CC;
+        }
+        .container {
+            margin-top : 20px;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+        input{
+        	width:200px;
+        }
+        #note {
+        	width:400px; 
+        	height:40px;
+        }
+        div {
+        	margin:20px;
+        }
+        </style>
+</head>
+<body>
+	<div class="container">
+		    <h1>To do list</h1>
+            <p>
+                This is a super todo list!! created by Andree and Claudia
+            </p>
+		<form method="post" action="/task/<task_id>">
+			<p>{{task.notes}}</p>
+			<div>Task:  <input type='text' name='title' value = "{{task.title}}"></div>
+			<div>notes: <input id="note" type='text' name='notes' value='{{task.notes}}'></div>
+			<input type="checkbox" name="completed" {{"checked" if task.done}}>Task Completed
+			<div><input type='submit' value='Save Changes'></div>
+		</form>
+	</div> <!--end div container-->
+</body>
+</html>
