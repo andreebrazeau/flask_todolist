@@ -31,6 +31,7 @@ def edit_task(task_id):
 @app.route("/task/<task_id>", methods=["POST"])
 def update_task(task_id):
     task = Task.query.get(task_id)
+    print "Updating", task.id
     task.title = request.form['title']
     task.note = request.form['notes']
     print request.form

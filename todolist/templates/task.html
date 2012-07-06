@@ -32,7 +32,7 @@
             <p>
                 This is a super todo list!! created by Andree and Claudia
             </p>
-		<form method="post" action="/task/<task_id>">
+		<form method="post" action={{ url_for("edit_task", task_id=task.id) }}>
 			<p>{{task.notes}}</p>
 			<div>Task:  <input type='text' name='title' value = "{{task.title}}"></div>
 			<div>notes: <input id="note" type='text' name='notes' value='{{task.notes}}'></div>

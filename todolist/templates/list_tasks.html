@@ -4,9 +4,38 @@
         body {
             background: #FFFFFF;
             font-family: Helvetica, Arial, sans-serif;
+            margin:0px;
+        }
+        div {
+        }
+        h2 {
+            margin: 0;
+        }
+        div.header {
+            background-color: #CC33CC;
+            padding: 10px;
+        }
+        div.main {
+            position: relative;
+            padding-top:15px;
+        }
+        div.tasks {
+            width: 50%;
+        }
+        div.completed_tasks {
+            width: 50%;
+            position: absolute;
+            top: 15px;
+            left: 50%;
+        }
+        div.footer {
+            width:100%;
+            bottom: 0px;
+            background-color: #CC33CC;
+            padding: 10px;
         }
         h1 {
-            color: #CC33CC;
+            color: #FFF;
         }
         ul {
             list-style-type: none;
@@ -18,10 +47,8 @@
             color: white;
             margin: 5px;
             padding: 10px;
-            width: 400px;
         }
         .container {
-            margin-top : 20px;
             margin-left: 10%;
             margin-right: 10%;
         }
@@ -47,28 +74,39 @@
     </head>
     <body>
         <div class = "container">
-            <h1>To do list</h1>
-            <p>
-                This is a super todo list!! created by Andree and Claudia
-            </p>
-            <div class="add_button">
-                <a href="/add">Add A Task</a>
+            <div class = "header">
+                <h1>To do list</h1>
+                <p>
+                    This is a super todo list!!
+                </p>
             </div>
-            <ul>
-                {% for task in tasks %}
-                    {% if task.done == False %}
-                        <li><a href="{{ url_for("edit_task", task_id=task.id) }}">{{task.title}}</a></li>
-                    {% endif %}
-                {% endfor%}
-            </ul>
-            <h2>Completed task</h2>
-            <ul>
-                {% for task in tasks %}
-                    {% if task.done == True %}
-                        <li><a href="/task/{{task.id}}">{{task.title}}</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+            <div class="main">
+                <div class="tasks">
+                    <h2>Tasks</h2>
+                    <a href="/add">Add A Task</a>
+                    <ul>
+                        {% for task in tasks %}
+                            {% if task.done == False %}
+                                <li><a href="{{ url_for("edit_task", task_id=task.id) }}">{{task.title}}</a></li>
+                            {% endif %}
+                        {% endfor%}
+                    </ul>
+                </div><!--end div tasks-->
+                <div class="completed_tasks">
+                    <h2>Completed Tasks</h2>
+                    <br />
+                    <ul>
+                        {% for task in tasks %}
+                            {% if task.done == True %}
+                                <li><a href="/task/{{task.id}}">{{task.title}}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div><!--end div completed Tasks-->
+            </div><!--end div main-->
+            <div class="footer">
+                <p>created by Andree and Claudia</p>
+            </div>
         </div><!--end div container-->
     </body>
 </html>
