@@ -31,11 +31,13 @@ def edit_task(task_id):
 @app.route("/task/<task_id>", methods=["POST"])
 def update_task(task_id):
     task = Task.query.get(task_id)
-    print "Updating", task.id
-    task.title = request.form['title']
-    task.note = request.form['notes']
-    print request.form
-    if request.form.get('completed'):
+
+@app.route('/', methods=["POST"])
+def mark_completed():
+    tasks_completed_ids = request.form.getlist('completed')
+    for id_num in tasks_completed_ids:
+        task = Task.query.get(id_num)
         task.complete()
     model.save_all()
     return redirect(url_for("home"))
+

@@ -2,7 +2,7 @@
     <head>
         <style>
         body {
-            background: #FFFFFF;
+            background: #fff;
             font-family: Helvetica, Arial, sans-serif;
             margin:0px;
         }
@@ -70,6 +70,7 @@
             width:450px;
             padding: 15px;
         }
+
         </style>
     </head>
     <body>
@@ -84,13 +85,21 @@
                 <div class="tasks">
                     <h2>Tasks</h2>
                     <a href="/add">Add A Task</a>
-                    <ul>
-                        {% for task in tasks %}
-                            {% if task.done == False %}
-                                <li><a href="{{ url_for("edit_task", task_id=task.id) }}">{{task.title}}</a></li>
-                            {% endif %}
-                        {% endfor%}
-                    </ul>
+                    <form method="post" action={{ url_for("mark_completed") }}>
+                        <ul>
+                            {% for task in tasks %}
+                                {% if task.done == False %}
+                                    <li><input type="checkbox" name="completed" value="{{task.id}}"> <a href="{{ url_for("edit_task", task_id=task.id) }}">{{task.title}}</a></li>
+                                {% endif %}
+                            {% endfor%}
+                        </ul>
+                        <div>
+                            <center>
+                                <input type='submit' name = 'completed' value='Update Completed Tasks'>
+                            </center>
+                            <br>
+                        </div>
+                    </form
                 </div><!--end div tasks-->
                 <div class="completed_tasks">
                     <h2>Completed Tasks</h2>
